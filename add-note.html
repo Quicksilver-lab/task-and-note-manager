@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Note</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Add Note</h1>
+            <a href="index.html">Back to Home</a>
+        </header>
+        <main>
+            <form id="note-form">
+                <input type="text" id="note-title" placeholder="Note Title" required>
+                <textarea id="note-content" placeholder="Note Content"></textarea>
+                <select id="note-category">
+                    <option value="">Select Category</option>
+                    <option value="Work">Work</option>
+                    <option value="Personal">Personal</option>
+                </select>
+                <button type="submit">Add Note</button>
+            </form>
+        </main>
+        <footer>
+            <p>&copy; 2024 Task and Note Manager</p>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
