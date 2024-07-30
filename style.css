@@ -36,6 +36,15 @@ h1 {
     font-size: 2em;
 }
 
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 button {
     padding: 10px 20px;
     background-color: #007BFF;
@@ -54,6 +63,17 @@ button:hover {
 
 button:focus {
     outline: none;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
 }
 
 form {
@@ -98,21 +118,4 @@ li {
 }
 
 li.completed {
-    text-decoration: line-through;
-    color: #aaa;
-}
-
-li button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-footer {
-    text-align: center;
-    margin-top: 20px;
-}
-
-input[type="text"], select {
-    margin-bottom: 15px;
-}
+    text-decoration:
