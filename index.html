@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task and Note Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task and Note Manager</h1>
+            <button id="theme-toggle">Toggle Dark Mode</button>
+        </header>
+        <main>
+            <section id="task-section">
+                <h2>Tasks</h2>
+                <form id="task-form">
+                    <input type="text" id="task-title" placeholder="Task Title" required>
+                    <textarea id="task-description" placeholder="Task Description"></textarea>
+                    <input type="date" id="task-deadline">
+                    <select id="task-category">
+                        <option value="">Select Category</option>
+                        <option value="Work">Work</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Shopping">Shopping</option>
+                    </select>
+                    <button type="submit">Add Task</button>
+                </form>
+                <input type="text" id="task-search" placeholder="Search Tasks">
+                <ul id="task-list"></ul>
+            </section>
+            <section id="note-section">
+                <h2>Notes</h2>
+                <form id="note-form">
+                    <input type="text" id="note-title" placeholder="Note Title" required>
+                    <textarea id="note-content" placeholder="Note Content"></textarea>
+                    <select id="note-category">
+                        <option value="">Select Category</option>
+                        <option value="Work">Work</option>
+                        <option value="Personal">Personal</option>
+                    </select>
+                    <button type="submit">Add Note</button>
+                </form>
+                <input type="text" id="note-search" placeholder="Search Notes">
+                <ul id="note-list"></ul>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Task and Note Manager</p>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
