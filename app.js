@@ -1,64 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const taskForm = document.getElementById('task-form');
-    const noteForm = document.getElementById('note-form');
-    const taskList = document.getElementById('task-list');
-    const noteList = document.getElementById('note-list');
-    const taskSearch = document.getElementById('task-search');
-    const noteSearch = document.getElementById('note-search');
+    // Toggle Dark Mode
     const themeToggle = document.getElementById('theme-toggle');
-
-    // Load tasks and notes from LocalStorage
-    loadTasks();
-    loadNotes();
-
-    taskForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const title = document.getElementById('task-title').value;
-        const description = document.getElementById('task-description').value;
-        const deadline = document.getElementById('task-deadline').value;
-        const category = document.getElementById('task-category').value;
-        addTask(title, description, deadline, category);
-        taskForm.reset();
-    });
-
-    noteForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const title = document.getElementById('note-title').value;
-        const content = document.getElementById('note-content').value;
-        const category = document.getElementById('note-category').value;
-        addNote(title, content, category);
-        noteForm.reset();
-    });
-
-    taskSearch.addEventListener('input', () => {
-        loadTasks(taskSearch.value);
-    });
-
-    noteSearch.addEventListener('input', () => {
-        loadNotes(noteSearch.value);
-    });
-
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        document.querySelector('.container').classList.toggle('dark-mode');
     });
 
-    function addTask(title, description, deadline, category) {
-        const tasks = getTasks();
-        const task = { title, description, deadline, category, completed: false };
-        tasks.push(task);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        loadTasks();
+    // Task Management
+    const taskForm = document.getElementById('task-form');
+    if (taskForm) {
+        taskForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const title = document.getElementById('task-title').value;
+            const description = document.getElementById('task-description').value;
+            const deadline = document.getElementById('task-deadline').value;
+            const category = document.getElementById('task-category').value;
+            addTask(title, description, deadline, category);
+        });
     }
 
-    function addNote(title, content, category) {
-        const notes = getNotes();
-        const note = { title, content, category };
-        notes.push(note);
-        localStorage.setItem('notes', JSON.stringify(notes));
+    const taskSearch = document.getElementById('task-search');
+    if (taskSearch) {
+        taskSearch.addEventListener('input', () => {
+            loadTasks(taskSearch.value);
+        });
+    }
+
+    // Note Management
+    const noteForm = document.getElementById('note-form');
+    if (noteForm) {
+        noteForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const title = document.getElementById('note-title').value;
+            const content = document.getElementById('note-content').value;
+            const category = document.getElementById('note-category').value;
+            addNote(title, content, category);
+        });
+    }
+
+    const noteSearch = document.getElementById('note-search');
+    if (noteSearch) {
+        noteSearch.addEventListener('input', () => {
+            loadNotes(noteSearch.value);
+        });
+    }
+
+    // Load tasks and notes
+    if (document.getElementById('task-list')) {
+        loadTasks();
+    }
+    if (document.getElementById('note-list')) {
         loadNotes();
     }
 
+    // Functions for managing tasks and notes
     function getTasks() {
         return JSON.parse(localStorage.getItem('tasks')) || [];
     }
@@ -67,23 +61,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return JSON.parse(localStorage.getItem('notes')) || [];
     }
 
-    function loadTasks(searchText = '') {
-        const tasks = getTasks().filter(task => task.title.toLowerCase().includes(searchText.toLowerCase()));
-        taskList.innerHTML = tasks.map((task, index) => `
+    function addTask(title, description, deadline, category) {
+        const tasks = getTasks();
+        tasks.push({ title, description, deadline, category, completed: false });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        loadTasks();
+    }
+
+    function addNote(title, content, category) {
+        const notes = getNotes();
+        notes.push({ title, content, category });
+        localStorage.setItem('notes', JSON.stringify(notes));
+        loadNotes();
+    }
+
+    function loadTasks(filter = '') {
+        const tasks = getTasks();
+        const filteredTasks = tasks.filter(task => task.title.toLowerCase().includes(filter.toLowerCase()));
+        document.getElementById('task-list').innerHTML = filteredTasks.map((task, index) => `
             <li class="${task.completed ? 'completed' : ''}">
                 <h3>${task.title}</h3>
                 <p>${task.description}</p>
-                <p>Deadline: ${task.deadline}</p>
                 <p>Category: ${task.category}</p>
-                <button onclick="toggleTask(${index})">Toggle Complete</button>
+                <p>Deadline: ${task.deadline}</p>
+                <button onclick="toggleTask(${index})">${task.completed ? 'Undo' : 'Complete'}</button>
                 <button onclick="deleteTask(${index})">Delete</button>
             </li>
         `).join('');
     }
 
-    function loadNotes(searchText = '') {
-        const notes = getNotes().filter(note => note.title.toLowerCase().includes(searchText.toLowerCase()));
-        noteList.innerHTML = notes.map((note, index) => `
+    function loadNotes(filter = '') {
+        const notes = getNotes();
+        const filteredNotes = notes.filter(note => note.title.toLowerCase().includes(filter.toLowerCase()));
+        document.getElementById('note-list').innerHTML = filteredNotes.map((note, index) => `
             <li>
                 <h3>${note.title}</h3>
                 <p>${note.content}</p>
