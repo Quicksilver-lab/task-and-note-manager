@@ -13,37 +13,18 @@
             <button id="theme-toggle">Toggle Dark Mode</button>
         </header>
         <main>
-            <section id="task-section">
-                <h2>Tasks</h2>
-                <form id="task-form">
-                    <input type="text" id="task-title" placeholder="Task Title" required>
-                    <textarea id="task-description" placeholder="Task Description"></textarea>
-                    <input type="date" id="task-deadline">
-                    <select id="task-category">
-                        <option value="">Select Category</option>
-                        <option value="Work">Work</option>
-                        <option value="Personal">Personal</option>
-                        <option value="Shopping">Shopping</option>
-                    </select>
-                    <button type="submit">Add Task</button>
-                </form>
-                <input type="text" id="task-search" placeholder="Search Tasks">
-                <ul id="task-list"></ul>
-            </section>
-            <section id="note-section">
-                <h2>Notes</h2>
-                <form id="note-form">
-                    <input type="text" id="note-title" placeholder="Note Title" required>
-                    <textarea id="note-content" placeholder="Note Content"></textarea>
-                    <select id="note-category">
-                        <option value="">Select Category</option>
-                        <option value="Work">Work</option>
-                        <option value="Personal">Personal</option>
-                    </select>
-                    <button type="submit">Add Note</button>
-                </form>
-                <input type="text" id="note-search" placeholder="Search Notes">
-                <ul id="note-list"></ul>
+            <nav>
+                <ul>
+                    <li><a href="add-task.html">Add Task</a></li>
+                    <li><a href="view-tasks.html">View Tasks</a></li>
+                    <li><a href="add-note.html">Add Note</a></li>
+                    <li><a href="view-notes.html">View Notes</a></li>
+                    <li><a href="#">App Info</a></li>
+                </ul>
+            </nav>
+            <section id="app-info">
+                <h2>Welcome to Task and Note Manager</h2>
+                <p>This app helps you manage your tasks and notes efficiently. Use the navigation menu to add, view, and organize your tasks and notes.</p>
             </section>
         </main>
         <footer>
